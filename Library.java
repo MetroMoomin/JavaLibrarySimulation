@@ -8,9 +8,9 @@ import java.util.*;
 public class Library {
 
     static int idC = 1;
-    static String books = "/Users/metromoomin/Desktop/School/java/LibrarySim/books.csv";
-    static String journals = "/Users/metromoomin/Desktop/School/java/LibrarySim/journals.csv";
-    static String movies = "/Users/metromoomin/Desktop/School/java/LibrarySim/movies.csv";
+    static String books = "/Users/metromoomin/Desktop/School/java/LibrarySim/csv/books.csv";
+    static String journals = "/Users/metromoomin/Desktop/School/java/LibrarySim/csv/journals.csv";
+    static String movies = "/Users/metromoomin/Desktop/School/java/LibrarySim/csv/movies.csv";
     
     static ArrayList<LibraryUser> users = AssignUsers();
     static ArrayList<LibraryItem> catalog = loadAll();
