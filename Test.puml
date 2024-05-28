@@ -1,0 +1,132 @@
+@startuml
+!define GRAPHVIZ_DOT /opt/homebrew/bin/dot
+
+
+!define LibraryUser abstract
+!define LibraryItem abstract
+
+class Library {
+    - idC: int
+    - books: String
+    - journals: String
+    - movies: String
+    - users: ArrayList<LibraryUser>
+    - catalog: ArrayList<LibraryItem>
+
+    + calcFine(users: ArrayList<LibraryUser>): double
+    + showLoans(): void
+    + borrowItem(id: int, date: int, userType: int): void
+    + showStatistics(): void
+    + AssignUsers(): ArrayList<LibraryUser>
+    + dailyOp(date: int): void
+    + simulation(z: int): void
+    + displayUsersWithLateRefunds(day: int): void
+    + blockRentalsByPenaltyThreshold(threshold: double): void
+    + main(args: String[]): void
+}
+
+Library --|> LibraryItem
+Library --|> LibraryUser
+
+abstract class LibraryUser {
+    - UId: int
+    - type: int
+    - fine: double
+    - NonRisky: boolean
+    - inDebt: boolean
+    - borrowedItems: ArrayList<LibraryItem>
+
+    + checkAccountBalance(day: int): void
+    + printUser(): void
+    + updateL(item: LibraryItem, date: int): void
+    + deleteLoan(item: LibraryItem): void
+    + setStatus(status: boolean): void
+    + updateOverdue(): void
+    + getUserType(): int
+    + getUFine(): double
+    + UserID(): int
+    + Status(): boolean
+    + isOverdue(): boolean
+    + addFine(): void
+    + numberOfLoaned(type: int): int
+}
+
+class Student {
+    + Student(UId: int)
+}
+
+Student --|> LibraryUser
+
+class FacultyMember {
+    + FacultyMember(UId: int)
+}
+
+FacultyMember --|> LibraryUser
+
+abstract class LibraryItem {
+    - daysLeft: int
+    - libraryId: int
+    - inStock: boolean
+    - returnCount: int
+    - borrowCount: int
+    - dateBorrowed: int
+    - Sloan: int
+    - Floan: int
+    - fine: double
+    - type: int
+    - title: String
+
+    + getLibraryId(): int
+    + printInfo(): void
+    + getType(): int
+    + Stock(): boolean
+    + getFine(): double
+    + setDateBorrowed(date: int): void
+    + CurrStock(): void
+    + setStartDay(userType: int): void
+    + getDaysLeft(): int
+    + isOverdue(): boolean
+    + computeFine(fine: double): double
+    + reset(): void
+    + updateBC(): void
+    + getBC(): int
+    + updateRC(): void
+    + getRC(): int
+    + updateDate(): void
+    + computeLateRefundPenalty(): double
+}
+
+class Book {
+    - author: String
+    - genre: String
+    - publisher: String
+
+    + Book(libraryId: int, title: String, author: String, genre: String, publisher: String)
+}
+
+Book --|> LibraryItem
+
+class Journal {
+    - eISSN: String
+    - publisher: String
+    - latestIssue: String
+    - journalURL: String
+
+    + Journal(libraryId: int, title: String, eISSN: String, publisher: String, latestIssue: String, journalURL: String)
+}
+
+Journal --|> LibraryItem
+
+class Movie {
+    - genre: String
+    - director: String
+    - year: String
+    - runtimeMinutes: String
+    - rating: String
+
+    + Movie(libraryId: int, title: String, genre: String, director: String, year: String, runtimeMinutes: String, rating: String)
+}
+
+Movie --|> LibraryItem
+
+@enduml
